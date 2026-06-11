@@ -4,7 +4,7 @@
 :root {
     /* Cores Institucionais Coerentes com as Restrições */
     --bg-body: rgb(67, 121, 242);
-    --bg-header: #D4D4E4;
+    --bg-header:rgb(255, 235, 0);
     --color-header-text: #000000;
     --bg-highlights: #000000;
     --color-highlight-text: #000000; /* Texto principal/secundário sobre o fundo geral */

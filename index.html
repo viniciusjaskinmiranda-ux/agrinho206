@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concurso Agrinho 2026 - AgroFuturo</title>
+    <style>
+        /* ==========================================================================
+           PASSO 1: CONFIGURAÇÃO DE VARIÁVEIS E IDENTIDADE VISUAL
+           ========================================================================== */
+        :root {
+            /* Cores Institucionais Coerentes com as Restrições */
+            --bg-body: #A4D6C7;
+            --bg-header: #D4D4E4;
+            --color-header-text: #000000;
+            --bg-highlights: #000000;
+            --color-highlight-text: #000000; /* Texto principal/secundário sobre o fundo geral */
+            --color-highlight-inner: #FFFFFF; /* Texto legível dentro de elementos pretos */
+            --border-color: red;
+            --border-style: solid;
+            --btn-main: #000000;
+            --btn-text: #000000; /* Texto do botão conforme especificado */
+            --btn-hover: #F9E6B5;
+            --link-color: #00008B; /* Azul escuro */
+
+            /* Tipografia e Espaçamento Configuráveis */
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-scale: 1rem;
+            --padding-sm: 0.5rem;
+            --padding-md: 1.5rem;
+            --padding-lg: 3rem;
+            --margin-md: 1.5rem;
+            --margin-lg: 3rem;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Modificadores de Alto Contraste (Acessibilidade) */
+        html.high-contrast {
+            --bg-body: #000000;
+            --bg-header: #111111;
+            --color-header-text: #FFFFFF;
+            --bg-highlights: #111111;
+            --color-highlight-text: #FFFFFF;
+            --color-highlight-inner: #FFFFFF;
+            --border-color: #FFFFFF;
+            --btn-main: #FFFFFF;
+            --btn-text: #000000;
+            --btn-hover: #FFFF00;
+            --link-color: #00FFFF;
+        }
+
+        /* Reset e Estilos Globais */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--color-highlight-text);
+            font-family: var(--font-family);
+            font-size: var(--font-scale);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease;
+        }
+
+        h1, h2, h3 {
+            line-height: 1.2;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        a:hover, a:focus {
+            text-decoration: none;
+            outline: 3px solid var(--border-color);
+        }
+
+        /* Botões Globais */
+        .btn-cta {
+            display: inline-block;
+            background-color: var(--btn-main);
+            color: #FFFFFF; /* Garantia de legibilidade inicial */
+            border: 2px var(--border-style) var(--border-color);
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-cta:hover, .btn-cta:focus {
+            background-color: var(--btn-hover);
+            color: var(--btn-text);
+            outline: none;
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           PASSO 2: ESTRUTURAÇÃO DO CONTEÚDO (LAYOUT)
+           ========================================================================== */
+        
+        /* 1. HEADER */
+        .main-header {
+            background-color: var(--bg-header);
+            color: var(--color-header-text);
+            padding: var(--padding-md);
+            border-bottom: 3px var(--border-style) var(--border-color);
+            text-align: center;
+        }
+
+        .main-header h1 {
+            font-size: clamp(1.2rem, 2.5vw, 2.2rem);
+            font-weight: 800;
+        }
+
+        /* Container de Conteúdo */
+        .container {
+            width: 100%;
+            max-width: 2560px;
+            margin: 0 auto;
+            padding: clamp(1rem, 5vw, var(--padding-lg));
+        }
+
+        /* 2. HERO SECTION */
+        .hero {
+            background-color: var(--bg-highlights);
+            color: var(--color-highlight-inner);
+            padding: var(--padding-lg) var(--padding-md);
+            border: 4px var(--border-style) var(--border-color);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--margin-lg);
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 3. SEÇÃO DE NARRATIVA */
+        .narrativa {
+            background: rgba(255, 255, 255, 0.4);
+            padding: var(--padding-md);
+            border: 2px var(--border-style) var(--border-color);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--margin-lg);
+        }
+
+        .narrativa p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        /* 4. CARDS E CONTEÚDO EXPANSÍVEL (Accordion) */
+        .accordion-section {
+            margin-bottom: var(--margin-lg);
+        }
+
+        .accordion-item {
+            background-color: var(--bg-highlights);
+            color: var(--color-highlight-inner);
+            border: 2px var(--border-style) var(--border-color);
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .accordion-trigger {
+            width: 100%;
+            background: none;
+            border: none;
+            color: inherit;
+            padding: var(--padding-md);
+            text-align: left;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .accordion-trigger:hover, .accordion-trigger:focus {
+            background-color: #222;
+            outline: none;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 var(--padding-md);
+            background-color: #111;
+        }
+
+        .accordion-content p {
+            padding: var(--padding-md) 0;
+        }
+
+        /* 5. ESPAÇOS RESERVADOS PARA IMAGENS */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--margin-md);
+            margin-bottom: var(--margin-lg);
+        }
+
+        .imagem {
+            width: 100%;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 2px var(--border-style) var(--border-color);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            background: #ccc;
+            aspect-ratio: 16 / 9;
+        }
+
+        .imagem img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .imagem:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        /* 6. COMPONENTES INTERATIVOS LADO A LADO */
+        .interactive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--margin-lg);
+            margin-bottom: var(--margin-lg);
+        }
+
+        .card-form, .card-comments {
+            background-color: var(--bg-highlights);
+            color: var(--color-highlight-inner);
+            padding: var(--padding-md);
+            border: 2px var(--border-style) var(--border-color);
+            border-radius: var(--border-radius);
+        }
+
+        .card-form h3, .card-comments h3 {
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px var(--border-style) var(--border-color);
+            border-radius: 6px;
+            background-color: #222;
+            color: #fff;
+            font-family: var(--font-family);
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--btn-hover);
+            background-color: #333;
+        }
+
+        .comments-list {
+            margin-top: 1rem;
+            max-height: 200px;
+            overflow-y: auto;
+            border-top: 1px var(--border-style) var(--border-color);
+            padding-top: 1rem;
+        }
+
+        .comment-item {
+            background: #222;
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* 7. RODAPÉ */
+        .main-footer {
+            background-color: var(--bg-highlights);
+            color: var(--color-highlight-inner);
+            padding: var(--padding-lg) var(--padding-md);
+            border-top: 4px var(--border-style) var(--border-color);
+            text-align: center;
+        }
+
+        .main-footer p {
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+
+        .references {
+            font-size: 0.9rem;
+        }
+
+        .references ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .references a {
+            color: #a4d6c7;
+        }
+
+        /* PASSO 4: CAIXA/MENU FLUTUANTE DE ACESSIBILIDADE */
+        .accessibility-menu {
+            position: fixed;
+            top: 20%;
+            right: 0;
+            background-color: #000;
+            border: 2px var(--border-style) var(--border-color);
+            border-right: none;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            z-index: 9999;
+            box-shadow: var(--box-shadow);
+        }
+
+        .acc-btn {
+            background-color: #222;
+            color: #fff;
+            border: 1px var(--border-style) var(--border-color);
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .acc-btn:hover, .acc-btn:focus {
+            background-color: var(--btn-hover);
+            color: #000;
+            outline: none;
+        }
+
+        /* Responsividade e Acessibilidade de Foco */
+        @media (max-width: 480px) {
+            .accessibility-menu {
+                top: auto;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                border-radius: 0;
+                border-left: none;
+                border-bottom: none;
+                flex-direction: row;
+                justify-content: space-around;
+                padding: 0.5rem;
+            }
+            body {
+                padding-bottom: 60px; /* Evita que o menu cubra o rodapé */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="accessibility-menu" aria-label="Menu de Acessibilidade">
+        <button class="acc-btn" id="btn-increase-font" aria-label="Aumentar tamanho do texto">A+</button>
+        <button class="acc-btn" id="btn-decrease-font" aria-label="Diminuir tamanho do texto">A-</button>
+        <button class="acc-btn" id="btn-contrast" aria-label="Alternar alto contraste">Contraste</button>
+        <button class="acc-btn" id="btn-tts-start" aria-label="Iniciar leitura de voz">Ouvir Texto</button>
+        <button class="acc-btn" id="btn-tts-stop" aria-label="Parar leitura de voz">Parar Áudio</button>
+    </nav>
+
+    <header class="main-header">
+        <h1>Concurso Agrinho 2026 - "Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente"</h1>
+    </header>
+
+    <main class="container" id="main-content">
+        
+        <section class="hero">
+            <h2>Nascentes Preservadas, Futuro Garantido</h2>
+            <p>Descubra como a produção leiteira sustentável em Pitanga/PR alia alta produtividade tecnológica com o cuidado ativo do nosso ecossistema e recursos hídricos.</p>
+            <button class="btn-cta" id="cta-hero">Conhecer o Projeto</button>
+        </section>
+
+        <section class="narrativa">
+            <h2>Nossa Jornada de Preservação no Campo</h2>
+            <p>Viver e produzir na área rural me ensinou que a água é o bem mais precioso que possuímos. Ao assumir a gestão da nossa propriedade leiteira em Pitanga, percebi que proteger as nascentes não era apenas um dever ecológico, mas a garantia da longevidade do próprio negócio. Implementamos o isolamento mecânico das áreas de recarga e o plantio de matas ciliares nativas, vendo a vida e a vazão da água retornarem com força total.</p>
+            
+            <p>O agronegócio é o verdadeiro motor da economy paranaense, sendo essencial para o desenvolvimento local e regional. Ele movimenta o comércio, gera milhares de empregos no campo e na cidade, e atrai investimentos em infraestrutura. Graças à agroindústria e à agricultura familiar, diversas cidades do interior prosperam com autonomia financeira. O agronegócio impulsiona a inovação tecnológica, melhora a renda dos produtores e garante a segurança alimentar. No cenário regional, essa potência produtiva transforma o estado em um gigante exportador, fortalecendo a balança comercial e elevando a qualidade de vida da população paranaense de forma sustentável.</p>
+            
+            <p>Dessa forma, entendemos que o equilíbrio entre produzir leite de alta qualidade e conservar a natureza é perfeitamente alcançável. Nossas ações de manejo de dejetos e conservação de solo servem hoje de modelo regional, provando que a sustentabilidade é a melhor ferramenta de inovação para o produtor moderno.</p>
+        </section>
+
+        <section class="gallery">
+            <div class="imagem"> <img src="https://cptstatic.s3.amazonaws.com/imagens/enviadas/materias/materia8172/nascentes-importancia-processo-de-recuperacao-e-conservacao-da-agua-cpt11.jpg" alt="[PROMPT_ESTUDANTE_ALT1: Foto mostrando a área de proteção ao entorno de uma nascente recuperada com cercamento e vegetação nativa crescendo]"> </div>
+            <div class="imagem"> <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYCGEgbTSxCVwdtlLJYBhOuNvQsMvzk3H6DAeAxcFrK7JDOE4AQXvNzg2vvI_W6pRE1YVKvOTMv-dwMG2A6ARPHQQ4zPeJe_sVI3C7B-G9jFhz_FSZjF8SGUY1-lhREnUK4RIorF-gt2I/s640/bio15.jpg" alt="[PROMPT_ESTUDANTE_ALT2: Vista panorâmica de uma propriedade leiteira sustentável em Pitanga, com gado em pastagem rotacionada]"> </div>
+            <div class="imagem"> <img src="https://www.institucional.europa.com.br/blog/wp-content/uploads/2021/01/FOTO-DE-CAPA-1.jpg" alt="[PROMPT_ESTUDANTE_ALT3: Detalhe de sistema de irrigação de manejo hídrico inteligente utilizando água protegida da propriedade]"> </div>
+        </section>
+
+        <section class="accordion-section">
+            <h2>Práticas Sustentáveis da Agropecuária Leiteira</h2>
+            
+            <div class="accordion-item">
+                <button class="accordion-trigger" aria-expanded="false">
+                    Manejo e Proteção das Áreas de Proteção Permanente (APPs)
+                    <span>+</span>
+                </button>
+                <div class="accordion-content">
+                    <p>O cercamento completo do raio de proteção das nascentes impede o pisoteio do gado bovino, evitando a compactação do solo e a contaminação direta da água por dejetos, permitindo a regeneração da flora.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-trigger" aria-expanded="false">
+                    Sistemas de Coleta e Tratamento de Dejetos
+                    <span>+</span>
+                </button>
+                <div class="accordion-content">
+                    <p>Utilização de esterqueiras e biodigestores para processar os dejetos da bovinocultura de leite, transformando passivos ambientais em biofertilizantes ricos para as pastagens, eliminando riscos de infiltração no lençol freático.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-trigger" aria-expanded="false">
+                    Pastejo Rotacionado Voisin e Conservação do Solo
+                    <span>+</span>
+                </button>
+                <div class="accordion-content">
+                    <p>Divisão das pastagens em piquetes temporizados que previnem o sobrepastoreio. Essa técnica mantém a cobertura vegetal perene alta, mitigando processos erosivos e facilitando a infiltração de água pluvial para recarga das nascentes.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="interactive-grid">
+            
+            <div class="card-form">
+                <h3>Entre em contato. Inscreva-se no nosso seminário on-line</h3>
+                <form id="seminar-form">
+                    <div class="form-group">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail Corporativo</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cidade">Cidade</label>
+                        <input type="text" id="cidade" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="estado">Estado</label>
+                        <input type="text" id="estado" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pais">País</label>
+                        <input type="text" id="pais" required>
+                    </div>
+                    <button type="submit" class="btn-cta" style="width: 100%;">Saiba mais sobre essa experiência</button>
+                </form>
+            </div>
+
+            <div class="card-comments">
+                <h3>Espaço do Leitor</h3>
+                <form id="comment-form">
+                    <div class="form-group">
+                        <label for="comentario">Deixe suas dúvidas ou sugestões de preservação:</label>
+                        <textarea id="comentario" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-cta">Enviar Comentário</button>
+                </form>
+                
+                <div class="comments-list" id="comments-container">
+                    <div class="comment-item"><strong>Carlos Silva:</strong> Excelente iniciativa! O isolamento de nascentes mudou a realidade da minha propriedade também.</div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <p>AgroFuturo 2026 ° Conectando a inteligência tecnologia à terra de forma sustentável</p>
+        <div class="references">
+            <strong>Referências de Pesquisa:</strong>
+            <ul id="ref-list">
+                <li><a href="https://www.emater.pr.gov.br" target="_blank" rel="noopener">[PROMPT_ESTUDANTE_REFERENCIAS: Instituto de Desenvolvimento Rural do Paraná - IDR]</a></li>
+                <li><a href="https://www.embrapa.br/gado-de-leite" target="_blank" rel="noopener">[Embrapa Gado de Leite - Práticas Sustentáveis]</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            /* ==========================================================================
+               LOGICA DO ACCORDION (CAIXAS EXPANSÍVEIS)
+               ========================================================================== */
+            const accordionTriggers = document.querySelectorAll('.accordion-trigger');
+
+            accordionTriggers.forEach(trigger => {
+                trigger.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    
+                    // Fechar todas as caixas abertas antes (efeito sanfona single-open opcional, mantido para clareza)
+                    document.querySelectorAll('.accordion-content').forEach(item => item.style.maxHeight = null);
+                    document.querySelectorAll('.accordion-trigger').forEach(btn => {
+                        btn.setAttribute('aria-expanded', 'false');
+                        btn.querySelector('span').textContent = '+';
+                    });
+
+                    if (!isExpanded) {
+                        this.setAttribute('aria-expanded', 'true');
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        this.querySelector('span').textContent = '-';
+                    }
+                });
+            });
+
+            /* ==========================================================================
+               GERENCIAMENTO DOS FORMULÁRIOS (INTERATIVIDADE SUCESSIVA)
+               ========================================================================== */
+            const seminarForm = document.getElementById('seminar-form');
+            if(seminarForm) {
+                seminarForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    alert('Inscrição realizada com sucesso! Você receberá as credenciais do seminário por e-mail.');
+                    seminarForm.reset();
+                });
+            }
+
+            const commentForm = document.getElementById('comment-form');
+            const commentsContainer = document.getElementById('comments-container');
+            if(commentForm && commentsContainer) {
+                commentForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const text = document.getElementById('comentario').value;
+                    
+                    const commentEl = document.createElement('div');
+                    commentEl.className = 'comment-item';
+                    commentEl.innerHTML = `<strong>Visitante:</strong> ${text}`;
+                    
+                    commentsContainer.prepend(commentEl);
+                    commentForm.reset();
+                });
+            }
+
+            const ctaHero = document.getElementById('cta-hero');
+            if(ctaHero) {
+                ctaHero.addEventListener('click', () => {
+                    document.getElementById('seminar-form').scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+
+            /* ==========================================================================
+               SISTEMA DE ACESSIBILIDADE AVANÇADA
+               ========================================================================== */
+            
+            // 1. Controle de tamanho de Fonte Relativa
+            let currentScale = 1.0;
+            const root = document.documentElement;
+
+            document.getElementById('btn-increase-font').addEventListener('click', () => {
+                if(currentScale < 1.4) {
+                    currentScale += 0.1;
+                    root.style.setProperty('--font-scale', `${currentScale}rem`);
+                }
+            });
+
+            document.getElementById('btn-decrease-font').addEventListener('click', () => {
+                if(currentScale > 0.8) {
+                    currentScale -= 0.1;
+                    root.style.setProperty('--font-scale', `${currentScale}rem`);
+                }
+            });
+
+            // 2. Modo de Alto Contraste
+            document.getElementById('btn-contrast').addEventListener('click', () => {
+                root.classList.toggle('high-contrast');
+            });
+
+            // 3. Text-to-Speech (Leitura de Voz Seletiva)
+            let speechUtterance = null;
+
+            document.getElementById('btn-tts-start').addEventListener('click', () => {
+                // Interrompe leituras prévias ativas
+                window.speechSynthesis.cancel();
+
+                // Captura de forma restrita apenas elementos de conteúdo textual da tag main
+                const textElements = document.querySelectorAll('#main-content p, #main-content h2');
+                let combinedText = "";
+                
+                textElements.forEach(el => {
+                    combinedText += el.textContent + " . ";
+                });
+
+                if (combinedText.trim().length > 0) {
+                    speechUtterance = new SpeechSynthesisUtterance(combinedText);
+                    speechUtterance.lang = 'pt-BR';
+                    speechUtterance.rate = 1.0;
+                    
+                    window.speechSynthesis.speak(speechUtterance);
+                }
+            });
+
+            document.getElementById('btn-tts-stop').addEventListener('click', () => {
+                window.speechSynthesis.cancel();
+            });
+        });
+    </script>
+</body>
+</html>

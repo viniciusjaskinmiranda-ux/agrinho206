@@ -1,0 +1,117 @@
+/* ==========================================================================
+   PASSO 1: CONFIGURAÇÃO DE VARIÁVEIS E IDENTIDADE VISUAL
+   ========================================================================== */
+:root {
+    /* Cores Institucionais Coerentes com as Restrições */
+    --bg-body: rgb(67, 121, 242);
+    --bg-header: #D4D4E4;
+    --color-header-text: #000000;
+    --bg-highlights: #000000;
+    --color-highlight-text: #000000; /* Texto principal/secundário sobre o fundo geral */
+    --color-highlight-inner: #FFFFFF; /* Texto legível dentro de elementos pretos */
+    --border-color: red;
+    --border-style: solid;
+    --btn-main: #000000;
+    --btn-text: #000000; /* Texto do botão conforme especificado no hover */
+    --btn-hover: #F9E6B5;
+    --link-color: #00008B; /* Azul escuro */
+
+    /* Tipografia e Espaçamento Configuráveis */
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-scale: 1rem;
+    --padding-sm: 0.5rem;
+    --padding-md: 1.5rem;
+    --padding-lg: 3rem;
+    --margin-md: 1.5rem;
+    --margin-lg: 3rem;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+/* Modificadores de Alto Contraste (Acessibilidade) */
+html.high-contrast {
+    --bg-body: #000000;
+    --bg-header: #111111;
+    --color-header-text: #FFFFFF;
+    --bg-highlights: #111111;
+    --color-highlight-text: #FFFFFF;
+    --color-highlight-inner: #FFFFFF;
+    --border-color: #FFFFFF;
+    --btn-main: #FFFFFF;
+    --btn-text: #000000;
+    --btn-hover: #FFFF00;
+    --link-color: #00FFFF;
+}
+
+/* Reset e Estilos Globais */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--color-highlight-text);
+    font-family: var(--font-family);
+    font-size: var(--font-scale);
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease;
+}
+
+h1, h2, h3 {
+    line-height: 1.2;
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+a:hover, a:focus {
+    text-decoration: none;
+    outline: 3px solid var(--border-color);
+}
+
+/* Botões Globais */
+.btn-cta {
+    display: inline-block;
+    background-color: var(--btn-main);
+    color: #FFFFFF; /* Garante visibilidade e contraste padrão inicial */
+    border: 2px var(--border-style) var(--border-color);
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn-cta:hover, .btn-cta:focus {
+    background-color: var(--btn-hover);
+    color: var(--btn-text);
+    outline: none;
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   PASSO 2: ESTRUTURAÇÃO DO CONTEÚDO (LAYOUT DE ALTA FIDELIDADE)
+   ========================================================================== */
+
+/* 1. HEADER */
+.main-header {
+    background-color: var(--bg-header);
+    color: var(--color-header-text);
+    padding: var(--padding-md);
+    border-bottom: 3px var(--border-style) var(--border-color);
+    text-align: center;
+}
+
+.main-header h1 {
+    font-size: clamp(1.2rem, 2.5vw, 2.2rem);
+    font-weight: 8
